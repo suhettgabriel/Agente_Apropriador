@@ -1,0 +1,84 @@
+<section class="page-shell">
+  <div class="form-card">
+    <div class="header">
+      <div>
+        <span class="eyebrow">Automação de horas</span>
+        <h1>Agente de Apropriação de Horas</h1>
+      </div>
+      <div class="status-badge">Operação em lote</div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-grid" novalidate>
+      <div class="field-group">
+        <label for="mes">Mês de referência</label>
+        <div class="mes-combo">
+          <select id="mes" formControlName="mes" (change)="alterarMesCalendario()">
+            <option *ngFor="let mes of meses" [value]="mes.valor">{{ mes.nome }}</option>
+          </select>
+          <select formControlName="ano" (change)="alterarMesCalendario()">
+            <option *ngFor="let ano of anosDisponiveis" [value]="ano">{{ ano }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Dias que deseja lançar</label>
+        <div class="calendar-header">
+          <span>{{ mesReferencia }}</span>
+          <span>{{ diasSelecionados.length }} dia(s) selecionado(s)</span>
+        </div>
+        <div class="calendar-weekdays">
+          <span *ngFor="let diaSemana of ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']">{{ diaSemana }}</span>
+        </div>
+        <div class="calendar-grid">
+          <button type="button" class="calendar-day" *ngFor="let dia of diasDoMes"
+            [class.empty]="dia === null" [class.selected]="estaSelecionado(dia)"
+            [disabled]="dia === null" (click)="alternarDia(dia)">
+            {{ dia ?? '' }}
+          </button>
+        </div>
+        <div class="day-list" *ngIf="diasSelecionados.length > 0">
+          <button type="button" class="day-chip" *ngFor="let dia of diasSelecionados" (click)="removerDia(dia)">
+            {{ dia }} ×
+          </button>
+        </div>
+        <small *ngIf="diasSelecionados.length === 0">
+          Selecione uma data no calendário e adicione à lista.
+        </small>
+      </div>
+
+      <div class="field-group">
+        <label for="arquivoPlanilha">Excel de atividades</label>
+        <label class="file-picker" for="arquivoPlanilha">
+          <span>Selecionar planilha</span>
+          <strong>{{ nomePlanilha }}</strong>
+        </label>
+        <input class="visually-hidden" id="arquivoPlanilha" type="file" accept=".xlsx,.xls" (change)="onFileChange($event)" />
+      </div>
+
+      <button type="submit" class="primary-button" [disabled]="!podeEnviar">
+        {{ isSubmitting ? 'Processando...' : 'Processar apropriação' }}
+      </button>
+    </form>
+
+    <div class="feedback" *ngIf="response || responseError">
+      <ng-container *ngIf="response as res">
+        <div class="feedback-message success" *ngIf="res.sucesso">
+          {{ res.mensagem }}
+        </div>
+        <div class="feedback-message info" *ngIf="res.quantidadeLancamentosRealizados">
+          Lançamentos realizados: {{ res.quantidadeLancamentosRealizados }}
+        </div>
+        <div class="details" *ngIf="res.detalhes">
+          <details>
+            <summary>Detalhes do processamento</summary>
+            <pre>{{ res.detalhes }}</pre>
+          </details>
+        </div>
+      </ng-container>
+      <div class="feedback-message error" *ngIf="responseError">
+        {{ responseError }}
+      </div>
+    </div>
+  </div>
+</section>
