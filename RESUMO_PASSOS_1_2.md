@@ -49,6 +49,6 @@ Aguardando o comando **"continue"** para gerar:
 
 ## Como usar agora:
 
-1. Execute os comandos do `SETUP_CLI.md` para criar a solution e instalar as dependências
+1. Consulte a seção de instalação do `README.md` para restaurar e compilar as dependências
 2. Os arquivos de domínio já estão criados em suas pastas corretas
 3. Aguarde a continuação para as implementações dos passos 3 e 4

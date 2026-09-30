@@ -34,8 +34,7 @@ Agente_Apropriador/
 |-- Apropriacao.Domain/          # Entidades, contratos, opções e exceções
 |-- Apropriacao.Infrastructure/  # Excel, arquivos temporários e Playwright
 |-- Apropriacao.Frontend/        # Aplicação Angular
-|-- README.md
-`-- CHECKLIST_FINAL.md
+`-- README.md
 ```
 
 ## Pré-requisitos
@@ -223,4 +222,4 @@ Confira a ordem das quatro colunas, as datas da planilha, o mês escolhido e os 
 
 ## Documentação complementar
 
-Os arquivos `RESUMO_PASSOS_*.md`, `ESTRUTURA_PASSOS_3_4.md` e `SETUP_CLI.md` registram etapas históricas de construção e podem não representar o comportamento atual. Este README e o código-fonte são as referências operacionais do projeto.
+Os arquivos `RESUMO_PASSOS_*.md`, `ESTRUTURA_PASSOS_3_4.md` e `COMPLETION_PASSOS_3_4.md` registram etapas históricas de construção e podem não representar o comportamento atual. Este README e o código-fonte são as referências operacionais do projeto.
